@@ -131,6 +131,12 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="card-footer clearfix">
+                    {{ $products->links('pagination::bootstrap-4') }}
+                </div>
+
+
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Dashboard - SB Admin</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -79,10 +80,12 @@
     </nav>
     <div id="layoutSidenav_content">
 
-        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data"
-            style="margin-top: 40px;">
+        <br>
+        <form method="POST" action="{{ route('products.update', ['product' => $products->id]) }}"
+            enctype="multipart/form-data">
             @csrf
-            <div class="card-body">
+            @method('PUT')
+            <div class="p-2">
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -94,44 +97,34 @@
                         </ul>
                     </div>
                 @endif
-                @if (session()->has('massage'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                        {{ session()->get('massage') }}
-                    </div>
-                @endif
-                @csrf
-                <div class="card-body">
-                    <!-- Add responsive classes to form elements -->
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" style="max-width: 98%;"
-                            placeholder="Enter Name of Product" value="{{ old('name') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <input type="text" class="form-control" id="type" name="type"
-                            style="max-width: 98%;" placeholder="Enter type" value="{{ old('type') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="Date">Date</label>
-                        <input type="text" class="form-control" id="date" name="date"
-                            style="max-width: 98%;" placeholder="Enter date" value="{{ old('date') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="salary">Salary</label>
-                        <input type="text" class="form-control" id="salary" name="salary"
-                            style="max-width: 98%;" placeholder="Enter salary" value="{{ old('salary') }}">
-                    </div>
-                    <br>
-                    <!-- ... (other form elements with max-width: 100%) ... -->
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        value="{{ old('name') ?? $products->name }}">
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Create</button>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" name="type"
+                        value="{{ old('type') ?? $products->type }}">
                 </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="text" class="form-control" id="date" name="date"
+                        value="{{ old('date') ?? $products->date }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="text" class="form-control" id="salary" name="salary"
+                        value="{{ old('salary') ?? $products->salary }}">
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" style="margin-left: 10px">Update</button>
         </form>
+
 
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">

@@ -22,11 +22,15 @@ Route::get('/', function () {
 
 Route::get('/', [ProductsController::class, 'index'])->name('index.show');
 
-Route::prefix('/products')->group(function () {
-    Route::get('/', [ProductsController::class, 'index'])->name('products.index');
-    Route::get('/create', [ProductsController::class, 'viewCreate'])->name('products.create');
-    Route::get('/update/{id}', [ProductsController::class, 'edit'])->name('products.edit');
-    Route::delete('/delete/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
-    //
-    Route::post('/create', [ProductsController::class, 'store'])->name('products.store.post');
-});
+Route::resource('products', ProductsController::class);
+
+
+// Route::prefix('/products')->group(function () {
+//     Route::get('/', [ProductsController::class, 'index'])->name('products.index');
+//     Route::get('/create', [ProductsController::class, 'viewCreate'])->name('products.create');
+//     // Route::get('/update/{id}', [ProductsController::class, 'edit'])->name('products.edit');
+//     Route::put('/update/{id}', [ProductsController::class, 'update'])->name('products.edit');
+//     Route::delete('/delete/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
+//     //
+//     Route::post('/create', [ProductsController::class, 'store'])->name('products.store.post');
+// });
